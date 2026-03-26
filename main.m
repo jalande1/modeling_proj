@@ -2,7 +2,8 @@ clear all; close all; format long;
 % Keeping momentum factors commented for now
 n = ;  % Fill in with the number of states of our Markov Chain
 % initial_momentum = ; % Fill in with our choice for appropriate initial momentum
-P = zeros(n,n);
+filename = ; % Path to file containing the statistics for our teams
+P = make_P(filename);
 states = zeros(1,1);
 % momentum_sequence = ones(1,1)*initial_momentum;
 team0_score = 0;
