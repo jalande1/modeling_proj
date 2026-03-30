@@ -22,22 +22,22 @@ function [Amake2, Amiss2, Amake3, Amiss3, A3ft, A2ft, A1and1, Aturn, Aoreb, Adre
 
     Aturn = Atov; 
     A1and1 = 0;
-    A2ft = (1-Atov)*A_is_fouled*A2ptr*(1-A2ptp) * (1-B_is_fouled) ;
-    A3ft = (1-Atov)*A_is_fouled*A3ptr*(1-A3ptp) * (1-B_is_fouled) ;
-    Amiss3 = (1-Atov)*(1-A_is_fouled)*A3ptr*(1-A3ptp) * (1-B_is_fouled) ;
-    Amake3 = (1-Atov)*A3ptr*A3ptp * (1-B_is_fouled) ;
-    Amiss2 = (1-Atov)*(1-A_is_fouled)*A2ptr*(1-A2ptp) * (1-B_is_fouled) ;
-    Amake2 = (1-Atov)*A2ptr*A2ptp * (1-B_is_fouled) ;
+    A2ft = (1-Atov)*A_is_fouled*A2ptr*(1-A2ptp);
+    A3ft = (1-Atov)*A_is_fouled*A3ptr*(1-A3ptp);
+    Amiss3 = (1-Atov)*(1-A_is_fouled)*A3ptr*(1-A3ptp);
+    Amake3 = (1-Atov)*A3ptr*A3ptp;
+    Amiss2 = (1-Atov)*(1-A_is_fouled)*A2ptr*(1-A2ptp);
+    Amake2 = (1-Atov)*A2ptr*A2ptp;
     Band1 = B_is_fouled;
 
     Bturn = Btov; 
     B1and1 = 0;
-    B2ft = (1-Btov)*B_is_fouled*B2ptr*(1-B2ptp) * (1-A_is_fouled) ;
-    B3ft = (1-Btov)*B_is_fouled*B3ptr*(1-B3ptp) * (1-A_is_fouled) ;
-    Bmiss3 = (1-Btov)*(1-B_is_fouled)*B3ptr*(1-B3ptp) * (1-A_is_fouled) ;
-    Bmake3 = (1-Btov)*B3ptr*B3ptp * (1-A_is_fouled) ;
-    Bmiss2 = (1-Btov)*(1-B_is_fouled)*B2ptr*(1-B2ptp) * (1-A_is_fouled) ;
-    Bmake2 = (1-Btov)*B2ptr*B2ptp * (1-A_is_fouled) ;
+    B2ft = (1-Btov)*B_is_fouled*B2ptr*(1-B2ptp);
+    B3ft = (1-Btov)*B_is_fouled*B3ptr*(1-B3ptp);
+    Bmiss3 = (1-Btov)*(1-B_is_fouled)*B3ptr*(1-B3ptp);
+    Bmake3 = (1-Btov)*B3ptr*B3ptp;
+    Bmiss2 = (1-Btov)*(1-B_is_fouled)*B2ptr*(1-B2ptp);
+    Bmake2 = (1-Btov)*B2ptr*B2ptp;
     Aand1 = A_is_fouled;
 
 
