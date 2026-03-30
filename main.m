@@ -68,6 +68,6 @@ if team0_score > team1_score
 end
 end
 % state = end_half(P,...);  IF WE WANT TO CONSIDER END-OF-HALF/LATE GAME HAPPENINGS
-team0wins/numruns
+team0wins/numruns;
 mean(team0scores)
 mean(team1scores)
