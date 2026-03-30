@@ -2,7 +2,7 @@ clear all; close all; format long;
 % Keeping momentum factors commented for now
 n = 22;  % Fill in with the number of states of our Markov Chain
 % initial_momentum = ; % Fill in with our choice for appropriate initial momentum
-filename = 'test1.txt'; % Path to file containing the statistics for our teams
+filename = 'test1.csv'; % Path to file containing the statistics for our teams
 [team0ft, team1ft, total_halfposs] = get_ftandpace(filename);
 P = make_P(filename);
 states = zeros(1,1);
@@ -23,7 +23,7 @@ while t < total_halfposs % Change to 1170 for end-of-half dynamics consideration
     % momentum = update_momentum(momentum, state);
     % momentum_sequence = [momentum_sequence momentum];
     if t >= 1
-        t_temp = evolve_time(state,states(end-1));
+        t_temp = evolve_time(state,states(numel(states)-1));
     else
         t_temp = 1;
     end
@@ -51,5 +51,7 @@ while t < total_halfposs % Change to 1170 for end-of-half dynamics consideration
     t = t+t_temp;
 end
 
-disp(['Final Score: Team A      Team B \n',num2str(team0_score),num2str(team1_score)]);
+disp('Final Score:')
+disp('Team A      Team B')
+disp([num2str(team0_score),'            ',num2str(team1_score)]);
 % state = end_half(P,...);  IF WE WANT TO CONSIDER END-OF-HALF/LATE GAME HAPPENINGS

@@ -1,9 +1,10 @@
 function [t_temp] = evolve_time(state,stateminus1)
-    if mod(state,11) <= 5
+    check = mod(state,11);
+    if check <= 5
         t_temp = 1;
-    elseif mod(state,11) == 6 && stateminus1 ~= 5
+    elseif all([check == 6, stateminus1 ~= 5])
         t_temp = 1;
-    elseif mod(state,11) == 9
+    elseif check == 9
         t_temp = 1;
     else
         t_temp = 0;
