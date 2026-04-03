@@ -2,7 +2,7 @@ clear all; close all; format long;
 % Keeping momentum factors commented for now
 n = 22;  % Fill in with the number of states of our Markov Chain
 % initial_momentum = ; % Fill in with our choice for appropriate initial momentum
-numruns = 100;
+numruns = 1000;
 team0scores = zeros(1,numruns);
 team1scores = zeros(1,numruns);
 team0wins = 0;
@@ -12,7 +12,6 @@ team0_vs_time = zeros(1,2*total_halfposs);
 team1_vs_time = zeros(1,2*total_halfposs);
 for i = 1:numruns
 P = make_P(filename);
-states = [];
 % momentum_sequence = ones(1,1)*initial_momentum;
 team0_score = 0;
 team1_score = 0;
@@ -21,6 +20,7 @@ phi = [0.5 zeros(1,10) 0.5 zeros(1,10)]; % Define the initial 50/50 jump ball pr
 t = 0;
 % momentum = initial_momentum;
 state = find(rand <= cumsum(phi),1); % Find first state 
+states = [state];
 while t < total_halfposs % Change to 1170 for end-of-half dynamics considerations
     % P = update_P(P,momentum);
     p = P(state,:);
@@ -47,6 +47,7 @@ t = 0;
 % momentum = initial_momentum;
 count2=0;
 state = find(rand <= cumsum(phi),1); % Find first state 
+states = [states state];
 while t < total_halfposs % Change to 1170 for end-of-half dynamics considerations
     % P = update_P(P,momentum);
     p = P(state,:);
