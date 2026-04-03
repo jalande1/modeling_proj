@@ -26,7 +26,9 @@ while t < total_halfposs % Change to 1170 for end-of-half dynamics consideration
     state = find(rand <= cumsum(p), 1); % Find next state in our sequence
     states = [states state]; % Can't think of any way to do this other than dynamically allocating
     [team0_score,team1_score,flag] = update_score(state, team0_score, team1_score,team0ft,team1ft);
-    streak_counter = update_streak(streak_counter,state,states(end-1));
+    if t>=1
+        streak_counter = update_streak(streak_counter,state,states(end-1));
+    end
     momentum = update_momentum(momentum, state, streak_counter);
     % momentum_sequence = [momentum_sequence momentum];
     if t >= 1
@@ -35,6 +37,7 @@ while t < total_halfposs % Change to 1170 for end-of-half dynamics consideration
         t_temp = 1;
     end
     t = t+t_temp;
+    P = make_P(filename);
 end
 % state = end_half(P,...);  IF WE WANT TO CONSIDER END-OF-HALF/LATE GAME HAPPENINGS
 
@@ -44,12 +47,13 @@ t = 0;
 count2=0;
 state = find(rand <= cumsum(phi),1); % Find first state 
 while t < total_halfposs % Change to 1170 for end-of-half dynamics considerations
-    % P = update_P(P,momentum);
+    P = update_P(P,momentum,streak_counter);
     p = P(state,:);
     state = find(rand <= cumsum(p), 1); % Find next state in our sequence
     states = [states state]; % Can't think of any way to do this other than dynamically allocating
     [team0_score,team1_score,flag] = update_score(state, team0_score, team1_score,team0ft,team1ft);
-    % momentum = update_momentum(momentum, state);
+    streak_counter = update_streak(streak_counter,state,states(end-1));
+    momentum = update_momentum(momentum, state, streak_counter);
     % momentum_sequence = [momentum_sequence momentum];
     if t >= 1
         t_temp = evolve_time(state,states(numel(states)-1));
@@ -57,7 +61,7 @@ while t < total_halfposs % Change to 1170 for end-of-half dynamics consideration
         t_temp = 1;
     end
     t = t+t_temp;
-    
+    P = make_P(filename);
 end
 % disp('Final Score:')
 % disp('Team A      Team B')
