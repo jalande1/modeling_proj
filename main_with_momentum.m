@@ -1,15 +1,16 @@
 clear all; close all; format long;
 n = 22;  % Fill in with the number of states of our Markov Chain
 initial_momentum = 0;
-numruns = 1000;
+numruns = 100;
+team0 = 'UConn';
+team1 = 'Duke';
 team0scores = zeros(1,numruns);
 team1scores = zeros(1,numruns);
 team0wins = 0;
 active_counter = 0;
 for i = 1:numruns
-filename = 'test_duke.csv'; % Path to file containing the statistics for our teams
-[team0ft, team1ft, total_halfposs] = get_ftandpace(filename);
-base_P = make_P(filename);
+[team0ft, team1ft, total_halfposs] = get_ftandpace(team0,team1);
+base_P = make_P(team0,team1);
 P=base_P;
 momentum_sequence = ones(1,1)*initial_momentum;
 team0_score = 0;

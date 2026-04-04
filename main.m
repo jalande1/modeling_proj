@@ -2,16 +2,17 @@ clear all; close all; format long;
 % Keeping momentum factors commented for now
 n = 22;  % Fill in with the number of states of our Markov Chain
 % initial_momentum = ; % Fill in with our choice for appropriate initial momentum
+team0 = 'UConn';
+team1 = 'Furman';
 numruns = 1;
 team0scores = zeros(1,numruns);
 team1scores = zeros(1,numruns);
 team0wins = 0;
-filename = 'test_duke.csv'; % Path to file containing the statistics for our teams
-[team0ft, team1ft, total_halfposs] = get_ftandpace(filename);
+[team0ft, team1ft, total_halfposs] = get_ftandpace(team0,team1);
 team0_vs_time = zeros(1,2*total_halfposs);
 team1_vs_time = zeros(1,2*total_halfposs);
 for i = 1:numruns
-P = make_P(filename);
+P = make_P(team0,team1);
 % momentum_sequence = ones(1,1)*initial_momentum;
 team0_score = 0;
 team1_score = 0;
@@ -81,6 +82,6 @@ team0winpercent = 100*team0wins/numruns
 avgteam0score = mean(team0scores)
 avgteam1score = mean(team1scores)
 
-figure(1); plot([1:total_halfposs*2],team0_vs_time,'b-','linewidth',1.5); hold on;
-plot([1:total_halfposs*2],team1_vs_time,'r-','linewidth',1.5); xlabel('Possession #');
-ylabel('Points'); title('Game Flow for Illinois vs. Iowa'); legend('Illinois', 'Iowa');
+% figure(1); plot([1:total_halfposs*2],team0_vs_time,'b-','linewidth',1.5); hold on;
+% plot([1:total_halfposs*2],team1_vs_time,'r-','linewidth',1.5); xlabel('Possession #');
+% ylabel('Points'); title('Game Flow for Illinois vs. Iowa'); legend('Illinois', 'Iowa');
