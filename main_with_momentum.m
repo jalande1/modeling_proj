@@ -1,9 +1,9 @@
 clear all; close all; format long;
 n = 22;  % Fill in with the number of states of our Markov Chain
 initial_momentum = 0;
-numruns = 100;
-team0 = 'UConn';
-team1 = 'Duke';
+numruns = 1000;
+team0 = 'Clemson';
+team1 = 'Florida';
 team0scores = zeros(1,numruns);
 team1scores = zeros(1,numruns);
 team0wins = 0;

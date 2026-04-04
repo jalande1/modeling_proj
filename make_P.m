@@ -33,13 +33,12 @@ update_list_1offense = [1,3,7,9,21,22];
 
 for i=1:numel(update_list_0offense)
     index = update_list_0offense(i);
-    gamma = (Aortg-Bdrtg)/(Aortg-Aoppdrtg);
-    gamma
+    gamma0 = Bdrtg/Aoppdrtg;
     sum = sum_team_0(P(index,:));
-    if gamma <= 1
-        new_win_prob = gamma*sum;
+    if gamma0 <= 1
+        new_win_prob = gamma0*sum;
     else
-        new_win_prob = 1-(1-sum)/gamma;
+        new_win_prob = 1-(1-sum)/gamma0;
     end
     P(index,:) = redistribute_team0_win(P(index,:),new_win_prob);
 end
@@ -47,12 +46,11 @@ end
 for i=1:numel(update_list_1offense)
     index = update_list_1offense(i);
     sum = sum_team_1(P(index,:));
-    gamma = (Bortg-Adrtg)/(Bortg-Boppdrtg);
-    gamma
-    if gamma <= 1
-        new_win_prob = gamma*sum;
+    gamma1 = Adrtg/Boppdrtg;
+    if gamma1 <= 1
+        new_win_prob = gamma1*sum;
     else
-        new_win_prob = 1-(1-sum)/gamma;
+        new_win_prob = 1-(1-sum)/gamma1;
     end
     P(index,:) = redistribute_team1_win(P(index,:),new_win_prob);
 end
