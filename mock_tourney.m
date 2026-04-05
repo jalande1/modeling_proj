@@ -82,6 +82,39 @@ while t < total_halfposs % Change to 1170 for end-of-half dynamics consideration
     t = t+t_temp;
     P = base_P;
 end
+while team0_score == team1_score
+% Overtime protocol
+state = find(rand <= cumsum(phi),1); % Find first state 
+states = [states state];
+t = 0;
+while t < total_halfposs/4
+    P = update_P(P,momentum,streak_counter);
+    p = P(state,:);
+    state = find(rand <= cumsum(p), 1); % Find next state in our sequence
+    states = [states state]; % Can't think of any way to do this other than dynamically allocating
+    [team0_score,team1_score,flag] = update_score(state, team0_score, team1_score,team0ft,team1ft);
+    if t >= 1
+        streak_counter = update_streak(streak_counter,state,states(end-1));
+    end
+    momentum = update_momentum(momentum, state, streak_counter);
+    % momentum_sequence = [momentum_sequence momentum];
+    if t >= 1
+        t_temp = evolve_time(state,states(numel(states)-1));
+        % t_temps = [t_temps t_temp];
+        % if numel(t_temps) > 20
+        %     if t_temps(numel(t_temps)-20:end) == zeros(1,21)
+        %             breakflag = 1;
+        %             states
+        %         break
+        %     end
+        % end
+    else
+        t_temp = 1;
+    end
+    t = t+t_temp;
+    P = base_P;
+end
+end
 if team0_score > team1_score
     round1winners = [round1winners,team0];
 elseif team1_score > team0_score
@@ -101,7 +134,7 @@ round2winners = [];
 for i = 1:16
     team0 = round1winners(2*i-1);
     team1 = round1winners(2*i);
-    [team0ft, team1ft, total_halfposs] = get_ftandpace(team0,team1);
+[team0ft, team1ft, total_halfposs] = get_ftandpace(team0,team1);
 base_P = make_P(team0,team1);
 P=base_P;
 initial_momentum = 0;
@@ -174,6 +207,39 @@ while t < total_halfposs % Change to 1170 for end-of-half dynamics consideration
     end
     t = t+t_temp;
     P = base_P;
+end
+while team0_score == team1_score
+% Overtime protocol
+state = find(rand <= cumsum(phi),1); % Find first state 
+states = [states state];
+t = 0;
+while t < total_halfposs/4
+    P = update_P(P,momentum,streak_counter);
+    p = P(state,:);
+    state = find(rand <= cumsum(p), 1); % Find next state in our sequence
+    states = [states state]; % Can't think of any way to do this other than dynamically allocating
+    [team0_score,team1_score,flag] = update_score(state, team0_score, team1_score,team0ft,team1ft);
+    if t >= 1
+        streak_counter = update_streak(streak_counter,state,states(end-1));
+    end
+    momentum = update_momentum(momentum, state, streak_counter);
+    % momentum_sequence = [momentum_sequence momentum];
+    if t >= 1
+        t_temp = evolve_time(state,states(numel(states)-1));
+        % t_temps = [t_temps t_temp];
+        % if numel(t_temps) > 20
+        %     if t_temps(numel(t_temps)-20:end) == zeros(1,21)
+        %             breakflag = 1;
+        %             states
+        %         break
+        %     end
+        % end
+    else
+        t_temp = 1;
+    end
+    t = t+t_temp;
+    P = base_P;
+end
 end
 if team0_score > team1_score
     round2winners = [round2winners,team0];
@@ -194,7 +260,7 @@ sweet_sixteenwinners = [];
 for i = 1:8
     team0 = round2winners(2*i-1);
     team1 = round2winners(2*i);
-    [team0ft, team1ft, total_halfposs] = get_ftandpace(team0,team1);
+[team0ft, team1ft, total_halfposs] = get_ftandpace(team0,team1);
 base_P = make_P(team0,team1);
 P=base_P;
 initial_momentum = 0;
@@ -267,6 +333,39 @@ while t < total_halfposs % Change to 1170 for end-of-half dynamics consideration
     end
     t = t+t_temp;
     P = base_P;
+end
+while team0_score == team1_score
+% Overtime protocol
+state = find(rand <= cumsum(phi),1); % Find first state 
+states = [states state];
+t = 0;
+while t < total_halfposs/4
+    P = update_P(P,momentum,streak_counter);
+    p = P(state,:);
+    state = find(rand <= cumsum(p), 1); % Find next state in our sequence
+    states = [states state]; % Can't think of any way to do this other than dynamically allocating
+    [team0_score,team1_score,flag] = update_score(state, team0_score, team1_score,team0ft,team1ft);
+    if t >= 1
+        streak_counter = update_streak(streak_counter,state,states(end-1));
+    end
+    momentum = update_momentum(momentum, state, streak_counter);
+    % momentum_sequence = [momentum_sequence momentum];
+    if t >= 1
+        t_temp = evolve_time(state,states(numel(states)-1));
+        % t_temps = [t_temps t_temp];
+        % if numel(t_temps) > 20
+        %     if t_temps(numel(t_temps)-20:end) == zeros(1,21)
+        %             breakflag = 1;
+        %             states
+        %         break
+        %     end
+        % end
+    else
+        t_temp = 1;
+    end
+    t = t+t_temp;
+    P = base_P;
+end
 end
 if team0_score > team1_score
     sweet_sixteenwinners = [sweet_sixteenwinners,team0];
@@ -287,7 +386,7 @@ elite_eightwinners = [];
 for i = 1:4
     team0 = sweet_sixteenwinners(2*i-1);
     team1 = sweet_sixteenwinners(2*i);
-    [team0ft, team1ft, total_halfposs] = get_ftandpace(team0,team1);
+[team0ft, team1ft, total_halfposs] = get_ftandpace(team0,team1);
 base_P = make_P(team0,team1);
 P=base_P;
 initial_momentum = 0;
@@ -360,6 +459,39 @@ while t < total_halfposs % Change to 1170 for end-of-half dynamics consideration
     end
     t = t+t_temp;
     P = base_P;
+end
+while team0_score == team1_score
+% Overtime protocol
+state = find(rand <= cumsum(phi),1); % Find first state 
+states = [states state];
+t = 0;
+while t < total_halfposs/4
+    P = update_P(P,momentum,streak_counter);
+    p = P(state,:);
+    state = find(rand <= cumsum(p), 1); % Find next state in our sequence
+    states = [states state]; % Can't think of any way to do this other than dynamically allocating
+    [team0_score,team1_score,flag] = update_score(state, team0_score, team1_score,team0ft,team1ft);
+    if t >= 1
+        streak_counter = update_streak(streak_counter,state,states(end-1));
+    end
+    momentum = update_momentum(momentum, state, streak_counter);
+    % momentum_sequence = [momentum_sequence momentum];
+    if t >= 1
+        t_temp = evolve_time(state,states(numel(states)-1));
+        % t_temps = [t_temps t_temp];
+        % if numel(t_temps) > 20
+        %     if t_temps(numel(t_temps)-20:end) == zeros(1,21)
+        %             breakflag = 1;
+        %             states
+        %         break
+        %     end
+        % end
+    else
+        t_temp = 1;
+    end
+    t = t+t_temp;
+    P = base_P;
+end
 end
 if team0_score > team1_score
     elite_eightwinners = [elite_eightwinners,team0];
@@ -380,7 +512,7 @@ final_fourwinners = [];
 for i = 1:2
     team0 = elite_eightwinners(2*i-1);
     team1 = elite_eightwinners(2*i);
-    [team0ft, team1ft, total_halfposs] = get_ftandpace(team0,team1);
+[team0ft, team1ft, total_halfposs] = get_ftandpace(team0,team1);
 base_P = make_P(team0,team1);
 P=base_P;
 initial_momentum = 0;
@@ -453,6 +585,39 @@ while t < total_halfposs % Change to 1170 for end-of-half dynamics consideration
     end
     t = t+t_temp;
     P = base_P;
+end
+while team0_score == team1_score
+% Overtime protocol
+state = find(rand <= cumsum(phi),1); % Find first state 
+states = [states state];
+t = 0;
+while t < total_halfposs/4
+    P = update_P(P,momentum,streak_counter);
+    p = P(state,:);
+    state = find(rand <= cumsum(p), 1); % Find next state in our sequence
+    states = [states state]; % Can't think of any way to do this other than dynamically allocating
+    [team0_score,team1_score,flag] = update_score(state, team0_score, team1_score,team0ft,team1ft);
+    if t >= 1
+        streak_counter = update_streak(streak_counter,state,states(end-1));
+    end
+    momentum = update_momentum(momentum, state, streak_counter);
+    % momentum_sequence = [momentum_sequence momentum];
+    if t >= 1
+        t_temp = evolve_time(state,states(numel(states)-1));
+        % t_temps = [t_temps t_temp];
+        % if numel(t_temps) > 20
+        %     if t_temps(numel(t_temps)-20:end) == zeros(1,21)
+        %             breakflag = 1;
+        %             states
+        %         break
+        %     end
+        % end
+    else
+        t_temp = 1;
+    end
+    t = t+t_temp;
+    P = base_P;
+end
 end
 if team0_score > team1_score
     final_fourwinners = [final_fourwinners,team0];
@@ -544,6 +709,39 @@ while t < total_halfposs % Change to 1170 for end-of-half dynamics consideration
     end
     t = t+t_temp;
     P = base_P;
+end
+while team0_score == team1_score
+% Overtime protocol
+state = find(rand <= cumsum(phi),1); % Find first state 
+states = [states state];
+t = 0;
+while t < total_halfposs/4
+    P = update_P(P,momentum,streak_counter);
+    p = P(state,:);
+    state = find(rand <= cumsum(p), 1); % Find next state in our sequence
+    states = [states state]; % Can't think of any way to do this other than dynamically allocating
+    [team0_score,team1_score,flag] = update_score(state, team0_score, team1_score,team0ft,team1ft);
+    if t >= 1
+        streak_counter = update_streak(streak_counter,state,states(end-1));
+    end
+    momentum = update_momentum(momentum, state, streak_counter);
+    % momentum_sequence = [momentum_sequence momentum];
+    if t >= 1
+        t_temp = evolve_time(state,states(numel(states)-1));
+        % t_temps = [t_temps t_temp];
+        % if numel(t_temps) > 20
+        %     if t_temps(numel(t_temps)-20:end) == zeros(1,21)
+        %             breakflag = 1;
+        %             states
+        %         break
+        %     end
+        % end
+    else
+        t_temp = 1;
+    end
+    t = t+t_temp;
+    P = base_P;
+end
 end
 if team0_score > team1_score
     nattychamp = team0;

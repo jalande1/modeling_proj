@@ -68,6 +68,30 @@ while t < total_halfposs % Change to 1170 for end-of-half dynamics consideration
         team1_vs_time(t+total_halfposs) = team1_score;
     end
 end
+while team0_score == team1_score
+% Overtime protocol
+state = find(rand <= cumsum(phi),1); % Find first state 
+states = [states state];
+t = 0;
+while t < total_halfposs/4
+    p = P(state,:);
+    state = find(rand <= cumsum(p), 1); % Find next state in our sequence
+    states = [states state]; % Can't think of any way to do this other than dynamically allocating
+    [team0_score,team1_score,flag] = update_score(state, team0_score, team1_score,team0ft,team1ft);
+    % momentum = update_momentum(momentum, state);
+    % momentum_sequence = [momentum_sequence momentum];
+    if t >= 1
+        t_temp = evolve_time(state,states(numel(states)-1));
+    else
+        t_temp = 1;
+    end
+    t = t+t_temp;
+    if i == 1
+        team0_vs_time(t+total_halfposs) = team0_score;
+        team1_vs_time(t+total_halfposs) = team1_score;
+    end
+end
+end
 % disp('Final Score:')
 % disp('Team A      Team B')
 % disp([num2str(team0_score),'            ',num2str(team1_score)]);

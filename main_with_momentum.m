@@ -1,7 +1,7 @@
 clear all; close all; format long;
 n = 22;  % Fill in with the number of states of our Markov Chain
 initial_momentum = 0;
-numruns = 1000;
+numruns = 100;
 team0 = 'Clemson';
 team1 = 'Florida';
 team0scores = zeros(1,numruns);
@@ -81,6 +81,39 @@ while t < total_halfposs % Change to 1170 for end-of-half dynamics consideration
     t = t+t_temp;
     P = base_P;
 end
+while team0_score == team1_score
+% Overtime protocol
+state = find(rand <= cumsum(phi),1); % Find first state 
+states = [states state];
+t = 0;
+while t < total_halfposs/4
+    P = update_P(P,momentum,streak_counter);
+    p = P(state,:);
+    state = find(rand <= cumsum(p), 1); % Find next state in our sequence
+    states = [states state]; % Can't think of any way to do this other than dynamically allocating
+    [team0_score,team1_score,flag] = update_score(state, team0_score, team1_score,team0ft,team1ft);
+    if t >= 1
+        streak_counter = update_streak(streak_counter,state,states(end-1));
+    end
+    momentum = update_momentum(momentum, state, streak_counter);
+    % momentum_sequence = [momentum_sequence momentum];
+    if t >= 1
+        t_temp = evolve_time(state,states(numel(states)-1));
+        % t_temps = [t_temps t_temp];
+        % if numel(t_temps) > 20
+        %     if t_temps(numel(t_temps)-20:end) == zeros(1,21)
+        %             breakflag = 1;
+        %             states
+        %         break
+        %     end
+        % end
+    else
+        t_temp = 1;
+    end
+    t = t+t_temp;
+    P = base_P;
+end
+end
 % disp('Final Score:')
 % disp('Team A      Team B')
 % disp([num2str(team0_score),'            ',num2str(team1_score)]);
@@ -92,6 +125,7 @@ end
 % if breakflag == 1
 %     break
 % end
+i
 end
 % state = end_half(P,...);  IF WE WANT TO CONSIDER END-OF-HALF/LATE GAME HAPPENINGS
 team0winpercent = 100*team0wins/numruns
