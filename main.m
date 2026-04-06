@@ -2,8 +2,8 @@ clear all; close all; format long;
 % Keeping momentum factors commented for now
 n = 22;  % Fill in with the number of states of our Markov Chain
 % initial_momentum = ; % Fill in with our choice for appropriate initial momentum
-team0 = 'Michigan';
-team1 = 'UConn';
+team0 = 'Duke';
+team1 = 'Georgia';
 numruns = 1000;
 team0scores = zeros(1,numruns);
 team1scores = zeros(1,numruns);
