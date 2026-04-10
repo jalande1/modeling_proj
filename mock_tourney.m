@@ -755,8 +755,40 @@ else
         nattychamp = team1;
     end
 end
-round1winners
-sweet_sixteenwinners
-elite_eightwinners
-final_fourwinners
-nattychamp
+round1winners;
+round1_winners_2026 = {
+    'TCU','Nebraska','Louisville','High Point','Duke','Vanderbilt','Arkansas','Michigan St', ...
+    'VCU','Michigan','Texas','Texas A&M','Illinois','Saint Louis','Houston','Gonzaga', ...
+    'Kentucky','Texas Tech','Arizona','Virginia','Iowa St','Alabama','Utah St','Tennessee', ...
+    'Iowa','St Johns','UCLA','Purdue','Florida','Miami','Kansas','UConn'
+};
+a = 10*sum(ismember(round1winners, round1_winners_2026))
+round2winners;
+round32 = {
+    'Michigan','Michigan St','Duke','Houston','Texas','Illinois','Nebraska','Arkansas', ...
+    'Iowa St','Alabama','Arizona','Tennessee','Alabama','Purdue','Iowa','UConn'
+};
+b = 20*sum(ismember(round2winners, round32))
+sweet_sixteenwinners;
+sweet16 = {
+    'Michigan','UConn','Illinois','Arizona', ...
+    'Tennessee','Duke','Iowa','Purdue'
+};
+c = 40*sum(ismember(sweet_sixteenwinners, sweet16))
+elite_eightwinners;
+elite8 = {
+    'Michigan','UConn','Illinois','Arizona'
+};
+d = 80*sum(ismember(elite_eightwinners, elite8))
+final_fourwinners;
+final4 = {
+    'Michigan','UConn'
+};
+e = 160*sum(ismember(final_fourwinners, final4))
+nattychamp;
+champion = {
+    'Michigan'
+};
+f = 320*sum(ismember(nattychamp, champion))
+
+a + b + c + d + e + f
