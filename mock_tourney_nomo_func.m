@@ -1,4 +1,4 @@
-function [score] = mock_tourney_nomo_func()    
+function [score, s16, f4] = mock_tourney_nomo_func()    
     clear all; close all; format long;
 
     matchups = {['Duke','vs','Siena'],['Ohio St','vs','TCU'],['St Johns','vs','N Iowa'],['Kansas','vs','Cal Baptist'],['Louisville','vs','S Florida'],['Michigan St','vs','N Dakota St'],['UCLA','vs','UCF'],['UConn','vs','Furman'],['Florida','vs','Prairie View'],['Clemson','vs','Iowa'],['Vanderbilt','vs','McNeese'],['Nebraska','vs','Troy'],['North Carolina','vs','VCU'],['Illinois','vs','Penn'],['Saint Marys','vs','Texas A&M'],['Houston','vs','Idaho'],['Arizona','vs','LIU'],['Villanova','vs','Utah St'],['Wisconsin','vs','High Point'],['Arkansas','vs','Hawaii'],['BYU','vs','Texas'],['Gonzaga','vs','Kennesaw St'],['Miami','vs','Missouri'],['Purdue','vs','Queens'],['Michigan','vs','Howard'],['Georgia','vs','Saint Louis'],['Texas Tech','vs','Akron'],['Alabama','vs','Hofstra'],['Tennessee','vs','Miami OH'],['Virginia','vs','Wright St'],['Kentucky','vs','Santa Clara'],['Iowa St','vs','Tennessee St']};
@@ -637,4 +637,7 @@ function [score] = mock_tourney_nomo_func()
     f = 320*sum(ismember(nattychamp, champion));
     
     score = a + b + c + d + e + f;
+    s16 = ismember(round2winners, round32);
+    f4 = ismember(elite_eightwinners, elite8);
+
 end
