@@ -1,7 +1,7 @@
 clear all; close all;
 sum = 0;
 max = 0;
-n = 100
+n = 1
 scores = [];
 s16_percentages_mo = zeros(1, 16);
 f4_perc_mo = zeros(1, 4);
@@ -36,6 +36,7 @@ s16_percentages_nomo = zeros(1, 16);
 f4_perc_nomo = zeros(1, 4);
 scores2 = [];
 for i = 1:n
+    i
     [score, s16, f4] = mock_tourney_nomo_func();
     if score > max
         max = score

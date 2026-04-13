@@ -2,8 +2,8 @@ clear all; close all; format long;
 % Keeping momentum factors commented for now
 n = 22;  % Fill in with the number of states of our Markov Chain
 % initial_momentum = ; % Fill in with our choice for appropriate initial momentum
-team0 = 'Duke';
-team1 = 'Georgia';
+team0 = 'North Carolina';
+team1 = 'VCU';
 numruns = 1000;
 team0scores = zeros(1,numruns);
 team1scores = zeros(1,numruns);
@@ -106,6 +106,13 @@ team0winpercent = 100*team0wins/numruns
 avgteam0score = mean(team0scores)
 avgteam1score = mean(team1scores)
 
+
+
+fileID = fopen('main_output.txt','a');
+fprintf(fileID,"%6.2f", team0winpercent);
+fprintf(fileID,"%6.2f", avgteam0score);
+fprintf(fileID,"%6.2f \n", avgteam1score);
+fclose(fileID);
 % figure(1); plot([1:total_halfposs*2],team0_vs_time,'b-','linewidth',1.5); hold on;
 % plot([1:total_halfposs*2],team1_vs_time,'r-','linewidth',1.5); xlabel('Possession #');
 % ylabel('Points'); title('Game Flow for Illinois vs. Iowa'); legend('Illinois', 'Iowa');

@@ -758,7 +758,7 @@ function [score, s16, f4] = mock_tourney_func()
             nattychamp = team1;
         end
     end
-    round1winners
+    round1winners;
     round1_winners_2026 = {
         'TCU','Nebraska','Louisville','High Point','Duke','Vanderbilt','Arkansas','Michigan St', ...
         'VCU','Michigan','Texas','Texas A&M','Illinois','Saint Louis','Houston','Gonzaga', ...
@@ -766,7 +766,7 @@ function [score, s16, f4] = mock_tourney_func()
         'Iowa','St Johns','UCLA','Purdue','Florida','Miami','Kansas','UConn'
     };
     a = 10*sum(ismember(round1winners, round1_winners_2026));
-    round2winners
+    round2winners;
     round32 = {
         'Michigan','Michigan St','Duke','Houston','Texas','Illinois','Nebraska','Arkansas', ...
         'Iowa St','Alabama','Arizona','Tennessee','Alabama','Purdue','Iowa','UConn'
@@ -796,7 +796,7 @@ function [score, s16, f4] = mock_tourney_func()
     
     score = a + b + c + d + e + f;
 
-    s16 = ismember(round2winners, round32);
-    f4 = ismember(elite_eightwinners, elite8);
+    s16 = ismember(round32, round2winners);
+    f4 = ismember(elite8, elite_eightwinners);
 
 end
